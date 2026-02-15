@@ -186,7 +186,7 @@ const IlluminatedBorderCard = ({ children, className = "", borderColor = "#3B82F
             ref={divRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="relative rounded-[2rem] overflow-hidden group h-full bg-slate-200" // El bg-slate-200 es el borde por defecto (inactivo)
+            className="relative rounded-[2rem] overflow-hidden group h-full bg-slate-200"
         >
             <div
                 className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
@@ -233,9 +233,9 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const navItems = [
-        { label: 'Servicios', id: 'servicios' },
-        { label: 'Marketplace', id: 'marketplace' },
-        { label: 'Blog', id: 'blog' }
+        { label: <Editable path="general.navbar.services" />, id: 'servicios' },
+        { label: <Editable path="general.navbar.marketplace" />, id: 'marketplace' },
+        { label: <Editable path="general.navbar.blog" />, id: 'blog' }
     ];
 
     return (
@@ -254,9 +254,9 @@ const Navbar = () => {
 
                 {/* Columna 2: Enlaces (Centro - Solo Desktop) */}
                 <div className="hidden md:flex justify-center items-center gap-10">
-                    {navItems.map((item) => (
+                    {navItems.map((item, index) => (
                         <button
-                            key={item.label}
+                            key={index}
                             onClick={() => scrollToSection(item.id)}
                             className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-brand-blue after:transition-all hover:after:w-full"
                         >
@@ -271,7 +271,7 @@ const Navbar = () => {
                         onClick={() => scrollToSection('contact')}
                         className="hidden md:block bg-slate-950 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-all transform hover:-translate-y-0.5"
                     >
-                        Contacto
+                        <Editable path="general.navbar.contact" />
                     </button>
                     <button className="md:hidden text-slate-950" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                         {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -282,13 +282,13 @@ const Navbar = () => {
             {/* Menú Móvil */}
             {mobileMenuOpen && (
                 <div className="absolute top-full left-0 w-full bg-white border-b border-slate-100 p-4 shadow-xl md:hidden flex flex-col gap-4 animate-in slide-in-from-top duration-300">
-                    {navItems.map((item) => (
-                        <button key={item.label} onClick={() => { setMobileMenuOpen(false); scrollToSection(item.id); }} className="text-left text-slate-800 font-medium py-2 border-b border-slate-50 last:border-0">
+                    {navItems.map((item, index) => (
+                        <button key={index} onClick={() => { setMobileMenuOpen(false); scrollToSection(item.id); }} className="text-left text-slate-800 font-medium py-2 border-b border-slate-50 last:border-0">
                             {item.label}
                         </button>
                     ))}
                     <button onClick={() => { setMobileMenuOpen(false); scrollToSection('contact'); }} className="text-left text-slate-900 font-bold py-2">
-                        Contacto
+                        <Editable path="general.navbar.contact" />
                     </button>
                 </div>
             )}
@@ -304,7 +304,7 @@ const Hero = () => {
         <section className="relative pt-16 pb-0 md:pt-24 overflow-hidden bg-white">
             <AuroraBackground />
 
-            {/* Background Element: Massive SAP Text Watermark (Fixed position & Typography) */}
+            {/* Background Element: Massive SAP Text Watermark */}
             <div className="absolute top-38 md:-top-84 left-1/2 -translate-x-1/2 select-none pointer-events-none z-0 w-full flex justify-center opacity-50">
                 <span className="font-sans font-black text-[30vw] md:text-[25rem] text-slate-900 opacity-[0.03] blur-[1px] tracking-tight leading-none mix-blend-overlay">
                     SAP
@@ -328,17 +328,17 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* Title - Massive, High Contrast, Tight Tracking */}
+                {/* Title */}
                 <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-display font-bold text-slate-950 tracking-tighter leading-[1.05] text-center mb-6 max-w-5xl">
                     <Editable path="hero.title" />
                 </h1>
 
-                {/* Subtitle - More breathing room, grey contrast */}
+                {/* Subtitle */}
                 <div className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10 text-center font-normal">
                     <Editable path="hero.subtitle" multiline />
                 </div>
 
-                {/* Buttons - Pill Shape, Black/White High Contrast */}
+                {/* Buttons */}
                 <div className="flex flex-col sm:flex-row justify-center gap-5 mb-16 w-full sm:w-auto">
                     <MagneticButton onClick={() => scrollToSection('contact')} variant="primary" className="px-8 py-4 min-w-[170px]">
                         <Editable path="hero.ctaPrimary" />
@@ -348,10 +348,10 @@ const Hero = () => {
                     </MagneticButton>
                 </div>
 
-                {/* THE "CINEMATIC UI" HERO IMAGE - Wide, Rounded, Impactful */}
+                {/* Visual Content (Video/Mockups) */}
                 <div className="relative w-full mx-auto perspective-1000 group">
 
-                    {/* THE KEY INTEGRATION: Floating "Identity Card" */}
+                    {/* Floating Identity Card */}
                     <div className="absolute -top-6 right-6 md:-top-12 md:right-12 z-40 animate-float-slow">
                         <div className="bg-white/90 backdrop-blur-xl border border-white/40 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] p-4 rounded-2xl flex items-center gap-4 min-w-[200px] transform transition-transform hover:scale-105 duration-300">
                             <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
@@ -367,12 +367,12 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    {/* The Main Container "Window" */}
+                    {/* Window Container */}
                     <div
                         className="relative bg-slate-900 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(2,6,23,0.3)] w-full aspect-[4/3] md:aspect-[21/9] lg:aspect-[2.4/1] transform transition-transform duration-700 hover:scale-[1.005] cursor-pointer ring-1 ring-slate-900/5 group-hover:shadow-[0_50px_100px_-20px_rgba(59,130,246,0.15)]"
                         onClick={() => setIsVideoOpen(true)}
                     >
-                        {/* Fake UI Header with SAP Identity */}
+                        {/* Fake UI Header */}
                         <div className="absolute top-0 left-0 w-full h-10 md:h-14 bg-slate-950/50 backdrop-blur-md flex items-center px-6 md:px-8 justify-between z-20 border-b border-white/5">
                             <div className="flex gap-2">
                                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
@@ -446,21 +446,15 @@ const Services = () => {
         <section id="servicios" className="bg-white pt-20 pb-24 border-t border-slate-100">
             <div className="max-w-7xl mx-auto px-6">
 
-                {/* NOTE: We removed the tagline from siteData so I'm hardcoding proper path assuming it exists or handled */}
-                {/* Wait, the previous implementation had "Nuestras propuestas" hardcoded. Let's make it fixed for now or add to data if user wants. User asked for editable texts. */}
-                {/* I will hardcode the tagline for now as it was hardcoded before, or better, wrap it in Editable if I add it to context, but context structure is fixed based on data.ts */}
-                {/* I will make "Nuestras propuestas" editable but I need a place to store it. Since I cannot easily change data.ts structure without more work, I will leave hardcoded strings as non-editable OR Editable with a dummy path if I extended the data structure. */}
-                {/* To be safe, I will stick to editing what is in siteData. */}
-
                 <div className="text-center mb-24 max-w-4xl mx-auto px-4">
                     <span className="text-xs font-bold text-brand-blue uppercase tracking-[0.2em] mb-4 block">
-                        Nuestras propuestas
+                        <Editable path="services.tagline" />
                     </span>
                     <h2 className="text-3xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-700 to-slate-900 tracking-tight mb-6 pb-2">
-                        Arquitectura de Alto Nivel
+                        <Editable path="services.main.title" />
                     </h2>
                     <p className="text-slate-500 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed antialiased">
-                        Diseñamos el ecosistema digital que tu empresa necesita para escalar sin límites.
+                        <Editable path="services.main.description" multiline />
                     </p>
                 </div>
 
@@ -524,7 +518,7 @@ const Services = () => {
 
                             <div className="mt-auto pt-8 border-t border-white/5 flex flex-wrap items-center gap-6">
                                 <button onClick={() => scrollToSection('contact')} className="bg-white text-slate-900 px-8 py-3.5 rounded-full font-bold flex items-center gap-2 hover:bg-blue-50 transition-all group/btn shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                                    Iniciar Proyecto <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                                    <Editable path="services.main.cta" /> <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
                                 </button>
                             </div>
                         </div>
@@ -563,7 +557,7 @@ const AddonsMarketplace = () => {
     const { content: siteData } = useContent();
     const [activeAddonId, setActiveAddonId] = useState(siteData.addons[0].id);
     const activeAddon = siteData.addons.find(a => a.id === activeAddonId) || siteData.addons[0];
-    const activeAddonIndex = siteData.addons.findIndex(a => a.id === activeAddonId); // Needed for path
+    const activeAddonIndex = siteData.addons.findIndex(a => a.id === activeAddonId);
 
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -596,13 +590,13 @@ const AddonsMarketplace = () => {
 
                 <div className="text-center mb-24 max-w-4xl mx-auto px-4">
                     <span className="text-xs font-bold text-brand-blue uppercase tracking-[0.2em] mb-4 block">
-                        Solinntec Store
+                        <Editable path="marketplace.tagline" />
                     </span>
                     <h2 className="text-3xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-700 to-slate-900 tracking-tight mb-6 pb-2">
-                        Marketplace de Add-ons
+                        <Editable path="marketplace.title" />
                     </h2>
                     <p className="text-slate-500 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed antialiased">
-                        Potencia tu ERP con nuestras extensiones certificadas y lleva SAP B1 al siguiente nivel.
+                        <Editable path="marketplace.subtitle" multiline />
                     </p>
                 </div>
 
@@ -700,7 +694,7 @@ const AddonsMarketplace = () => {
                                 </div>
                                 <div className="flex flex-wrap gap-4">
                                     <button onClick={() => scrollToSection('contact')} className="bg-brand-blue text-white px-8 py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-brand-blue/20 flex items-center gap-2 group/btn">
-                                        Solicitar Demo <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                                        <Editable path="marketplace.cta" /> <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
                                     </button>
                                     {activeAddon.isPremium && (
                                         <div className="flex items-center gap-2 text-amber-700 bg-amber-50 border border-amber-100 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider">
@@ -733,13 +727,13 @@ const Blog = () => {
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-24 max-w-4xl mx-auto px-4">
                     <span className="text-xs font-bold text-brand-blue uppercase tracking-[0.2em] mb-4 block">
-                        Actualidad
+                        <Editable path="blog.tagline" />
                     </span>
                     <h2 className="text-3xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-slate-700 to-slate-900 tracking-tight mb-6 pb-2">
-                        Novedades y Noticias
+                        <Editable path="blog.title" />
                     </h2>
                     <p className="text-slate-500 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed antialiased">
-                        Mantente al día con las últimas actualizaciones de Solinntec y el ecosistema SAP.
+                        <Editable path="blog.subtitle" multiline />
                     </p>
                 </div>
 
@@ -764,7 +758,7 @@ const Blog = () => {
                                 </div>
                             </div>
                             <div className="pt-6 mt-auto flex items-center gap-2 text-sm font-bold text-slate-900 group-hover:gap-3 transition-all">
-                                Leer nota completa <ArrowRight size={16} />
+                                <Editable path="blog.readMore" /> <ArrowRight size={16} />
                             </div>
                         </FadeIn>
                     ))}
@@ -772,7 +766,7 @@ const Blog = () => {
                 {hasMore && (
                     <div className="mt-16 flex justify-center">
                         <button onClick={() => setVisibleCount(prev => prev + 3)} className="group flex items-center gap-3 bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-full font-bold hover:bg-slate-50 hover:border-brand-blue/30 transition-all shadow-sm transform hover:-translate-y-1">
-                            Ver más novedades <ArrowDown size={18} className="group-hover:translate-y-1 transition-transform" />
+                            <Editable path="blog.cta" /> <ArrowDown size={18} className="group-hover:translate-y-1 transition-transform" />
                         </button>
                     </div>
                 )}
@@ -791,11 +785,15 @@ const Footer = () => {
                     <AuroraBackground />
 
                     <div className="relative z-10 max-w-3xl mx-auto">
-                        <h2 className="text-3xl md:text-5xl font-display font-bold mb-8 tracking-tight leading-tight">Hablemos de tu futuro con SAP.</h2>
-                        <p className="text-slate-300 mb-12 text-lg md:text-xl leading-relaxed font-light">Agenda una sesión estratégica con nuestros arquitectos de soluciones.<br className="hidden md:block" /> Sin compromiso, solo visión.</p>
+                        <h2 className="text-3xl md:text-5xl font-display font-bold mb-8 tracking-tight leading-tight"><Editable path="footer.title" /></h2>
+                        <p className="text-slate-300 mb-12 text-lg md:text-xl leading-relaxed font-light"><Editable path="footer.subtitle" multiline /></p>
                         <div className="flex flex-col sm:flex-row justify-center gap-5">
-                            <MagneticButton onClick={() => window.location.href = `mailto:${siteData.general.contactEmail}`} variant="secondary" className="px-10 py-5 bg-white text-brand-darkBlue hover:bg-slate-100 border-none shadow-xl hover:shadow-2xl hover:-translate-y-1">Agendar Reunión (Email)</MagneticButton>
-                            <MagneticButton onClick={() => window.open(siteData.general.whatsappLink, '_blank')} variant="outline" className="px-10 py-5 border-slate-600">Enviar WhatsApp</MagneticButton>
+                            <MagneticButton onClick={() => window.location.href = `mailto:${siteData.general.contactEmail}`} variant="secondary" className="px-10 py-5 bg-white text-brand-darkBlue hover:bg-slate-100 border-none shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                                <Editable path="footer.ctaEmail" />
+                            </MagneticButton>
+                            <MagneticButton onClick={() => window.open(siteData.general.whatsappLink, '_blank')} variant="outline" className="px-10 py-5 border-slate-600">
+                                <Editable path="footer.ctaWhatsapp" />
+                            </MagneticButton>
                         </div>
                     </div>
                 </div>
@@ -805,11 +803,11 @@ const Footer = () => {
                         <span className="font-bold text-slate-900">SpA</span>
                     </div>
                     <div className="flex gap-8 font-medium">
-                        <a href={siteData.general.linkedinLink} className="hover:text-brand-blue transition-colors">LinkedIn</a>
-                        <a href="#" className="hover:text-brand-blue transition-colors">Instagram</a>
-                        <a href="#" className="hover:text-brand-blue transition-colors">Aviso Legal</a>
+                        <a href={siteData.general.linkedinLink} className="hover:text-brand-blue transition-colors"><Editable path="footer.links.linkedin" /></a>
+                        <a href="#" className="hover:text-brand-blue transition-colors"><Editable path="footer.links.instagram" /></a>
+                        <a href="#" className="hover:text-brand-blue transition-colors"><Editable path="footer.links.legal" /></a>
                     </div>
-                    <div className="font-medium text-slate-400">&copy; {new Date().getFullYear()} Solinntec. <span className="hidden md:inline">Rights Reserved.</span></div>
+                    <div className="font-medium text-slate-400">&copy; {new Date().getFullYear()} Solinntec. <span className="hidden md:inline"><Editable path="footer.rights" /></span></div>
                 </div>
             </div>
         </footer>

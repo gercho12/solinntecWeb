@@ -16,6 +16,12 @@ export const siteData = {
     contactPhone: "+56 9 1234 5678",
     whatsappLink: "https://wa.me/56912345678",
     linkedinLink: "https://linkedin.com/company/solinntec",
+    navbar: {
+      services: "Servicios",
+      marketplace: "Marketplace",
+      blog: "Blog",
+      contact: "Contacto",
+    }
   },
   hero: {
     badge: "SAP Gold Partner",
@@ -25,11 +31,13 @@ export const siteData = {
     ctaSecondary: "Ver Ecosistema",
   },
   services: {
+    tagline: "Nuestras propuestas",
     main: {
       id: "sap-core",
       title: "Implementación SAP B1",
       subtitle: "CERTIFICADA",
       description: "Centraliza finanzas y operaciones con el ERP #1 del mundo. Con Solinntec, aseguras una implementación experta que maximiza tu eficiencia y potencia el crecimiento real.",
+      cta: "Iniciar Proyecto",
       features: ["Implementacion profesional", "Capacitacion completa", "Soporte premium", "Equipo dinámico"],
     },
     grid: [
@@ -37,8 +45,8 @@ export const siteData = {
         id: "cloud",
         title: "SAP Cloud Hosting",
         description: "Servidores optimizados para HANA. Latencia cero.",
-        icon: "Cloud", // Puede ser nombre de Lucide o URL
-        iconUrl: "", // Si se coloca una URL aquí, tendrá prioridad
+        icon: "Cloud",
+        iconUrl: "",
       },
       {
         id: "dev",
@@ -46,8 +54,13 @@ export const siteData = {
         description: "Capacitados para llevar a cabo cualquier desarrollo: Integraciones, automatizaciones y programas.",
         icon: "Code",
       }
-
     ]
+  },
+  marketplace: {
+    tagline: "Solinntec Store",
+    title: "Marketplace de Add-ons",
+    subtitle: "Potencia tu ERP con nuestras extensiones certificadas y lleva SAP B1 al siguiente nivel.",
+    cta: "Solicitar Demo",
   },
   addons: [
     {
@@ -121,6 +134,13 @@ export const siteData = {
       image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000"
     }
   ],
+  blog: {
+    tagline: "Actualidad",
+    title: "Novedades y Noticias",
+    subtitle: "Mantente al día con las últimas actualizaciones de Solinntec y el ecosistema SAP.",
+    readMore: "Leer nota completa",
+    cta: "Ver más novedades",
+  },
   news: [
     {
       id: 1,
@@ -167,5 +187,17 @@ export const siteData = {
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
       link: "#"
     }
-  ]
+  ],
+  footer: {
+    title: "Hablemos de tu futuro con SAP.",
+    subtitle: "Agenda una sesión estratégica con nuestros arquitectos de soluciones.\nSin compromiso, solo visión.",
+    ctaEmail: "Agendar Reunión (Email)",
+    ctaWhatsapp: "Enviar WhatsApp",
+    links: {
+      linkedin: "LinkedIn",
+      instagram: "Instagram",
+      legal: "Aviso Legal",
+    },
+    rights: "Rights Reserved."
+  }
 };

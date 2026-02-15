@@ -27,7 +27,7 @@ export const Editable: React.FC<EditableProps> = ({ path, as: Tag = 'span', clas
     };
 
     if (isEditing) {
-        const inputClass = `w-full bg-yellow-50/50 border-2 border-dashed border-yellow-400/50 rounded px-1 transition-all focus:outline-none focus:border-yellow-500 focus:bg-white text-inherit font-inherit ${className}`;
+        const inputClass = `w-full bg-yellow-50/50 border-2 border-dashed border-yellow-400/50 rounded px-1 transition-all focus:outline-none focus:border-yellow-500 focus:bg-white text-slate-900 font-inherit ${className}`;
 
         if (multiline) {
             return (
