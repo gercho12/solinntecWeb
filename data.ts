@@ -26,7 +26,7 @@ export const siteData = {
   },
   "hero": {
     "badge": "SAP Gold Partner",
-    "title": "Expertos en Soluciones Tecnológicas fer",
+    "title": "Expertos en Soluciones Tecnológicas",
     "subtitle": "Arquitectura empresarial de alto rendimiento. Integramos, optimizamos y escalamos tu negocio con el ERP líder mundial.",
     "ctaPrimary": "Consultoría SAP",
     "ctaSecondary": "Ver Ecosistema"
