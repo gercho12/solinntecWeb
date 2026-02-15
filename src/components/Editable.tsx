@@ -22,31 +22,34 @@ export const Editable: React.FC<EditableProps> = ({ path, as: Tag = 'span', clas
     // If value is not found in content (e.g. array item not handled yet), fallback to children or empty string
     const displayValue = value !== undefined ? value : children;
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        updateContent(path, e.target.value);
+
+    // We use a ref to handle the contentEditable changes without re-rendering on every keystroke for performance,
+    // but we need to update the context on blur to save.
+    const handleBlur = (e: React.FocusEvent<HTMLElement>) => {
+        // Prevent updates if value hasn't changed to avoid unnecessary re-renders/API calls logic
+        if (e.target.innerText !== value) {
+            updateContent(path, e.target.innerText);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+        if (e.key === 'Enter' && !multiline) {
+            e.preventDefault();
+            e.currentTarget.blur();
+        }
     };
 
     if (isEditing) {
-        const inputClass = `w-full bg-yellow-50/50 border-2 border-dashed border-yellow-400/50 rounded px-1 transition-all focus:outline-none focus:border-yellow-500 focus:bg-white text-slate-900 font-inherit ${className}`;
-
-        if (multiline) {
-            return (
-                <textarea
-                    value={String(displayValue || '')}
-                    onChange={handleChange}
-                    className={inputClass}
-                    rows={3}
-                />
-            );
-        }
-
         return (
-            <input
-                type="text"
-                value={String(displayValue || '')}
-                onChange={handleChange}
-                className={inputClass}
-            />
+            <Tag
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                className={`outline-none min-w-[20px] transition-all cursor-text rounded-sm px-0.5 empty:before:content-['Empty'] empty:before:text-gray-300 border border-transparent hover:border-brand-blue/30 focus:border-brand-blue/50 focus:bg-white/5 ${className}`}
+            >
+                {displayValue}
+            </Tag>
         );
     }
 
