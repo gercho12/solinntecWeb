@@ -26,13 +26,13 @@ export const siteData = {
   },
   "hero": {
     "badge": "SAP Gold Partner",
-    "title": "Expertos en Soluciones Tecnológicas buenas.",
-    "subtitle": "Arquitectura empresarial de alto rendimiento. Integramos, optimizamos y escalamos tu negocio con el ERP líder nacional.",
+    "title": "Expertos en Soluciones Tecnológicas",
+    "subtitle": "Arquitectura empresarial de alto rendimiento. Integramos, optimizamos y escalamos tu negocio con el ERP líder mundial.",
     "ctaPrimary": "Consultoría SAP",
     "ctaSecondary": "Ver Ecosistema"
   },
   "services": {
-    "tagline": "PROPUESTAS",
+    "tagline": "NUESTRAS PROPUESTAS",
     "main": {
       "id": "sap-core",
       "title": "Implementación SAP B1",
