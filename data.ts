@@ -7,7 +7,7 @@
 
 export const siteData = {
   "assets": {
-    "logo": "./solinntec.png",
+    "logo": "/solinntec.png",
     "sapLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/2560px-SAP_2011_logo.svg.png",
     "sapB1FullLogo": "https://www.nwaretech.com/wp-content/uploads/2025/04/sap_businessone_r_grad_blu-2048x273.png",
     "heroVideoUrl": "https://www.youtube.com/embed/XcOJIk5uBnE?autoplay=1&mute=0"
